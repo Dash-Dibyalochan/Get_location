@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch-Location</title>
+    <style>
+        *{
+            font-size:3vw;
+        }
+    </style>
+</head>
+<body>
+    <h2>Get Geo location</h2>
+    <button onclick="getLocation()">Get</button>
+    <p id="location"></p>
+    <form action="https://maps.google.com/maps">
+        <input type="text" name="q" id="myLocation">
+        <button>Go</button>
+    </form>
+    <script>
+        let x=document.getElementById("location");
+        function getLocation(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(getPosition);
+            }
+            else{
+                x.innerText="Browser not supported";
+            }
+        }
+        function getPosition(position){
+            let latitudeValue=position.coords.latitude;
+            let longitudeValue=position.coords.longitude;
+            x.innerHTML = "Latitude: " + latitudeValue + 
+            "<br>Longitude: " + longitudeValue;
+            document.getElementById("myLocation").value = latitudeValue+","+longitudeValue;
+        }
+    </script>
+</body>
+</html>
